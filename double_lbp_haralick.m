@@ -43,15 +43,18 @@ function [X, Xn] = double_lbp_haralick(I)
   for row=1:rstep:(rows - 1)
     for column=1:cstep:(columns - 1)
       J = I(row: min(row + rstep - 1, rows), column: min(column + cstep - 1, columns));
-      [Y, Yn] = Bfx_haralick(J, options);
-      X = [X Y];
-      Xn = [Xn; Yn];
       [Y, Yn] = Bfx_lbp(J, uniform_options);
       X = [X Y];
       Xn = [Xn; Yn];
+
       [Y, Yn] = Bfx_lbp(J, ri_options);
       X = [X Y];
       Xn = [Xn; Yn];
+
+      [Y, Yn] = Bfx_haralick(J, options);
+      X = [X Y];
+      Xn = [Xn; Yn];
+
       [Y, Yn] = Bfx_gabor(J, gabor_options);
       X = [X Y];
       Xn = [Xn; Yn];
@@ -59,7 +62,6 @@ function [X, Xn] = double_lbp_haralick(I)
       % GABOR
       % LBP
       %
-      Xn = [Xn; Yn];
     end
   end
 end
