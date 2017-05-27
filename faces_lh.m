@@ -1,4 +1,4 @@
-function [M, Xn] = faces_lh(first_face, last_face, first_sample, last_sample)
+function [M, Xn, d] = faces_lh(first_face, last_face, first_sample, last_sample)
   M = [];
   Mx = [];
   f=Bio_statusbar('Beginning extraction ...');

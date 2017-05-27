@@ -1,2 +1,6 @@
-*.DS_Store
+*/.DS_Store
+.DS_Store
 faces/*
+*/.python_version
+.python_version
+
