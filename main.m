@@ -14,10 +14,10 @@ d = Bds_labels(10*ones(143,1));
 dt = Bds_labels(1*ones(143,1));
 
 % NORMALIZACION
-[Xz, muzx, sigmazx] = zscore(X);
+[Xz, mux, sigmax] = zscore(X);
 % EL TESTING DEBE SER NORMALIZADO BAJO LOS MISMOS
 % PARAMETROS QUE EL TRAINING
-Xtz = (Xt - muzx) ./ sigmazx;
+Xtz = (Xt - mux) ./ sigmax;
 
 % LIMPIEZA DE VARIABLES
 clean = Bfs_clean(Xz, d);
@@ -32,7 +32,7 @@ s = Bfs_sfs(Xz, double(d), op);
 % s = [1043	1023	1035	1037	1437	289	1011	1319	1249	1464	516	1281	279	547	639	575	446	92	551	274	996	3	1277	1248	1235	1202	461	1478	241	741];
 
 % OBTENER PCA
-[Y,lambda,A,Xs,mx] = Bft_pca(Xz, 0.99);
+[Y,lambda,A,Xs,mx] = Bft_pca(Xz, 0.95);
 [Yz, muy, sigmay] = zscore(Y);
 
 % OBTENER PSLR
@@ -46,11 +46,11 @@ F = [Tz];
 
 % REALIZAR MISMA TRANSFORMACION DE PCA SOBRE TESTING
 % 546 ES EL TAMAÑO DE Y
-B = A(:,1:1006);
-Mxt = ones(143, 1)*mx;
+B = A(:,1:675);
+Mxt = ones(2744, 1)*mx;
 X0t = Xtz - Mxt;
 Yt = X0t * B;
-Ytz = (Yt - muy(1:1006)) ./ sigmay(1:1006);
+Ytz = (Yt - muy(1:675)) ./ sigmay(1:675);
 
 % REALIZAR MISMO PSLR SOBRE TESTING
 Tt = ((Yt - muy) ./ sigmay) * W;
